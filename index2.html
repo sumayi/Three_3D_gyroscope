@@ -47,9 +47,18 @@
     <!-- 性能插件 -->
     <script src="js/stats.min.js"></script>
     <script src="js/DeviceOrientationControls.js"></script>
-    
+    <style>
+        #container{
+            background: #000;
+        }
+        canvas{
+            margin-top: 60px;
+    transform: scale(1.2);
+        }
+    </style>
     <script>
         // var vConsole = new VConsole();
+        console.log(123)
         if (WEBGL.isWebGLAvailable() === false) {
 
             document.body.appendChild(WEBGL.getWebGLErrorMessage());
@@ -71,7 +80,7 @@
             // far: 渲染区域离摄像机最远的距离， 3 仅在距离摄像机near和far间的区域会被渲染到 canvas中
             camera = new THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 1000);
             //控制相机在整个3D环境中的位置（取值为3维坐标对象-THREE.Vector3(x,y,z)）
-            camera.position.set(15, 10, -15);
+            camera.position.set(0, 5, -15);
             console.log(camera)
             scene = new THREE.Scene();
             //Clock对象的构造函数.用来记录时间
@@ -126,8 +135,8 @@
             controls.target.set(0, 2, 0);
             controls.update();
             //性能插件
-            stats = new Stats();
-            container.appendChild(stats.dom);
+            // stats = new Stats();
+            // container.appendChild(stats.dom);
             //屏幕旋转
             window.addEventListener('resize', onWindowResize, false);
         }
@@ -157,7 +166,7 @@
             //window.requestAnimationFrame
             requestAnimationFrame(animate);
             render();
-            stats.update();
+            // stats.update();
             controls2.update();
             
         }

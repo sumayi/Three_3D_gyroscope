@@ -4,7 +4,8 @@
  *
  * W3C Device Orientation control (http://w3c.github.io/deviceorientation/spec-source-orientation.html)
  */
-
+let aaa=0
+let aftData=null;
 THREE.DeviceOrientationControls = function (object) {
 
   var scope = this;
@@ -85,17 +86,33 @@ THREE.DeviceOrientationControls = function (object) {
     var device = scope.deviceOrientation;
 
     if (device) {
-
+      aaa+=1;
+      if(aaa===100){
+        aaa=0
+        console.log(device.alpha,device.beta,device.gamma)
+      }
+      let Mathgamma=null;
+      if(Math.abs(device.beta)>10){
+        return false
+        aftData=aftData
+      }
+      aftData=device.beta
       var alpha = device.alpha ? THREE.Math.degToRad(device.alpha) + scope.alphaOffset : 0; // Z
+      // var alpha =0; // Z
 
-      var beta = device.beta ? THREE.Math.degToRad(device.beta) : 0; // X'
+      // var beta = device.beta ? THREE.Math.degToRad(device.beta): 0; // X'
+      var beta =   aftData ? THREE.Math.degToRad(aftData): 0; // X'
 
-      var gamma = device.gamma ? THREE.Math.degToRad(device.gamma) : 0; // Y''
+      // var gamma = device.gamma ? THREE.Math.degToRad(device.gamma) : 0; // Y''
+      // console.log(THREE.Math.degToRad(device.gamma))
+      var gamma = 0; // Y''
 
-      var orient = scope.screenOrientation ? THREE.Math.degToRad(scope.screenOrientation) : 0; // O
+      // var orient = scope.screenOrientation ? THREE.Math.degToRad(scope.screenOrientation) : 0; // O
+      var orient =  0; // O
 
-      setObjectQuaternion(scope.object.quaternion, alpha, beta, gamma, orient);
-      console.log(alpha,beta,gamma,orient)
+      setObjectQuaternion(scope.object.quaternion, -alpha, beta, gamma, orient);
+    
+      
     }
 
 
